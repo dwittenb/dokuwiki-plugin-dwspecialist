@@ -1,0 +1,7 @@
+base   DWspecialist
+author Dietrich Wittenberg
+email  info.wittenberg@online.de
+date   2012-07-01
+name   DWspecialist plugin
+desc   Functions to include SPECIAl links to a unordered LIST
+url    http://dokuwiki.org/plugin:dwspecialist 
