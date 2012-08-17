@@ -3,5 +3,10 @@ author Dietrich Wittenberg
 email  info.wittenberg@online.de
 date   2012-07-01
 name   DWspecialist plugin
+<<<<<<< HEAD
 desc   Adds an action-link to a ordered or unordered list ands adds a toolbar button to editor.
 url    http://dokuwiki.org/plugin:dwspecialist 
+=======
+desc   Functions to include SPECIAl links to a unordered LIST
+url    http://dokuwiki.org/plugin:dwspecialist 
+>>>>>>> 44888d75738d6f153225921e80e29311b38ab566
