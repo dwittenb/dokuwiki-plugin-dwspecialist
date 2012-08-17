@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<?php 
-=======
 <?php
->>>>>>> 44888d75738d6f153225921e80e29311b38ab566
 /**
  * This plugin allows to add an unordered list of toolbar-Links
  * It can be used to create the wiki-syntax of a list that is needed by 
@@ -27,12 +23,8 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 	function syntax_plugin_dwspecialist() {
 	}
 		
-<<<<<<< HEAD
 /* not longer needed for DokuWiki 2009-12-25 “Lemming” and later
 	function getInfo(){
-=======
-  function getInfo(){
->>>>>>> 44888d75738d6f153225921e80e29311b38ab566
     return array(
       'author' => 'Dietrich Wittenberg',
       'email'  => 'info.wittenberg@online.de',
@@ -42,12 +34,9 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
       'url'    => 'http://dokuwiki.org/plugin:dwspecialist',
     );
   }
-<<<<<<< HEAD
 */				
-=======
-				
->>>>>>> 44888d75738d6f153225921e80e29311b38ab566
-  function getType(){ return 'substition'; }
+
+	function getType(){ return 'substition'; }
 	function getAllowedTypes() { return array('disabled'); }   
   function getPType(){ return 'block'; }
   function getSort(){ return 160; }
