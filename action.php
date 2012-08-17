@@ -69,7 +69,8 @@ class action_plugin_dwspecialist extends DokuWiki_Action_Plugin {
   /**
    * @return multitype:string 
    */
-  function getInfo(){
+/* not longer needed for DokuWiki 2009-12-25 “Lemming” and later
+	function getInfo(){
     return array(
       'author' => 'Dietrich Wittenberg',
       'email'  => 'info.wittenberg@online.de',
@@ -79,7 +80,7 @@ class action_plugin_dwspecialist extends DokuWiki_Action_Plugin {
       'url'    => 'http://dokuwiki.org/plugin:dwspecialist',
     );
   }
-	  
+*/	  
   /* 
    * Register the eventhandlers
    * @see DokuWiki_Action_Plugin::register()

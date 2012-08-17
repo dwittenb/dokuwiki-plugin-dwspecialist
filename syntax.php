@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * This plugin allows to add an unordered list of toolbar-Links
  * It can be used to create the wiki-syntax of a list that is needed by 
@@ -23,7 +23,8 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 	function syntax_plugin_dwspecialist() {
 	}
 		
-  function getInfo(){
+/* not longer needed for DokuWiki 2009-12-25 “Lemming” and later
+	function getInfo(){
     return array(
       'author' => 'Dietrich Wittenberg',
       'email'  => 'info.wittenberg@online.de',
@@ -33,7 +34,7 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
       'url'    => 'http://dokuwiki.org/plugin:dwspecialist',
     );
   }
-				
+*/				
   function getType(){ return 'substition'; }
 	function getAllowedTypes() { return array('disabled'); }   
   function getPType(){ return 'block'; }
