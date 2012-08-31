@@ -61,6 +61,7 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 	  switch ($state) {
 			case DOKU_LEXER_ENTER:
       	break;
+
       case DOKU_LEXER_UNMATCHED:
       	return array($state, $match);
       	break;
@@ -71,41 +72,6 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
       	} elseif (preg_match('#(\n)([ ]*)()<special([^\n>]*)>#', $match, $result)) {
       	} elseif (preg_match('#()()([^\n<])<special([^\n>]*)>#', $match, $result)) {
       	}
-      	
-      	/*
-      	list($match, $crlf, $listoffset, $prolog, $parameter)=$result;
-      	if ($match != "") { // any match
-      		$parameters=explode("&", $parameter);
-      		$match="";
-
-      		foreach ($parameters as $action) {
-      			$action=trim($action);
-      			switch ($action) {
-      				case "page_tools":
-      					$match.=$this->_handle_special(array($action), $crlf, $listoffset, $prolog);
-      					$actions=array("edit", "revert", "revisions", "backlink", "subscribe");
-      					$match.=$this->_handle_special($actions, $crlf, "  ".$listoffset, $prolog);
-      					break;
-     					case "site_tools":
-      					$match.=$this->_handle_special(array($action), $crlf, $listoffset, $prolog);
-     						$actions=array("recent", "media", "index");
-      					$match.=$this->_handle_special($actions, $crlf, "  ".$listoffset, $prolog);
-     						break;
-     					case "user_tools":
-      					$match.=$this->_handle_special(array($action), $crlf, $listoffset, $prolog);
-     						$actions=array("login", "register", "profile", "admin");
-      					$match.=$this->_handle_special($actions, $crlf, "  ".$listoffset, $prolog);
-     						break;
-     								
-      				default:
-      					$match.=$this->_handle_special(array($action), $crlf, $listoffset, $prolog);
-      					break;
-      			} // switch
-      		} // foreach
-      	} // !($match=="")
-
-      	return array($state, $match);
-      	*/
       	return array($state, $result);
       	break;
 
@@ -114,8 +80,6 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
       	break;
 
       case DOKU_LEXER_SPECIAL :
-			  //if (preg_match('(\[NOW]\)',$match,$matches)) 
-				//return array($state, $match); //es[1],'');
 				return array($state, $match);
         break;
 		}
@@ -125,11 +89,13 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 	function _render_special($actions, $crlf, $listoffset, $prolog) {
   	global $conf;
 		global $lang;
-		global $backup;
+		global $BACKUP;
 		global $INFO;
+		global $ID;
+		global $REV;
 		 
-		$id =$backup['ID'];
-		$rev=$backup['REV'];
+		$id		= ($BACKUP['ID']) 	? $BACKUP['ID'] 	: $ID.'x';
+		$rev	= ($BACKUP['REV'])	? $BACKUP['REV'] 	: $REV;
 		
 		$line="";
     foreach ($actions as $action) {
