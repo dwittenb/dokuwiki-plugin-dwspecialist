@@ -89,13 +89,12 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 	function _render_special($actions, $crlf, $listoffset, $prolog) {
   	global $conf;
 		global $lang;
-		global $BACKUP;
 		global $INFO;
 		global $ID;
 		global $REV;
 		 
-		$id		= ($BACKUP['ID']) 	? $BACKUP['ID'] 	: $ID.'x';
-		$rev	= ($BACKUP['REV'])	? $BACKUP['REV'] 	: $REV;
+		$id  = getID();
+		$rev = $conf['REV'];
 		
 		$line="";
     foreach ($actions as $action) {
@@ -119,8 +118,7 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 				case "backlink":
 				case "subscribe":
 				case "subscription":
-					$act=tpl_get_action($action);
-					//$act['params']['do']; is now defined
+					$act=tpl_get_action($action);					//$act['params']['do']; is now defined
 					if ($act) {
 						$name=(key_exists('btn_'.$act['type'], $lang)) ? $lang['btn_'.$act['type']] : $action;
 						//$act['params']['id']=$ID;
@@ -134,7 +132,10 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
 					break;
 			
 				case "topbar":
-					$line.=$crlf.$listoffset.$prolog."[[".$action."|Navigationsleiste]]";
+					if ($this->getConf('topbarname')) {
+						$topbar=$this->getConf('topbarname');
+						$line.=$crlf.$listoffset.$prolog."[[".$topbar."|Navigationsleiste]]";
+					}
 					break;
 			
 				case "breadcrumbs":
@@ -163,18 +164,16 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
      * Create output
      */
 	function render($mode, &$renderer, $data) {
-  	//global $ID;
-  	//global $INFO;
-  	global $_dwlm_content;
+  	//global $this->dwspecialist_content;
   	 
     if($mode == 'xhtml'){
 			list($state,$match) = $data;
       switch ($state) {
       	case DOKU_LEXER_ENTER:
-      		$_dwlm_content="";
+      		$this->dwspecialist_content="";
       		break;
       	case DOKU_LEXER_UNMATCHED:
-      		$_dwlm_content.=$match; //$renderer->_xmlEntities($match);      		
+      		$this->dwspecialist_content.=$match; //$renderer->_xmlEntities($match);      		
       		break;
       	case DOKU_LEXER_MATCHED:
       		
@@ -212,12 +211,12 @@ class syntax_plugin_dwspecialist extends DokuWiki_Syntax_Plugin {
       		
       		//return array($state, $match);
       		
-      		$_dwlm_content.=$wikitext; //$renderer->_xmlEntities($match);      		
+      		$this->dwspecialist_content.=$wikitext; //$renderer->_xmlEntities($match);      		
       		break;
       		case DOKU_LEXER_EXIT:
        		$renderer->info['cache'] = false; 
-       		$renderer->doc .= p_render($mode, p_get_instructions($_dwlm_content), $info);
-       		$_dwlm_content="";
+       		$renderer->doc .= p_render($mode, p_get_instructions($this->dwspecialist_content), $info);
+       		$this->dwspecialist_content="";
       		break;
       }
       return true;
